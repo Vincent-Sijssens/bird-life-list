@@ -1,0 +1,45 @@
+<section>
+  <header>
+    <h2>Editing '<%= @bird[:common_name] %>'</h2>
+    <ul>
+      <li>
+        <form action="/birds/<%= params[:bird_id] %>/delete" method="post">
+          <button type="submit">Delete species from your list</button>
+        </form>
+      </li>
+    </ul>
+  </header>
+</section>
+
+<form action="/birds/<%= params[:bird_id] %>" method="post">
+  <h3>Edit the names of the observed species</h3>
+  <dl>
+    <dt>
+      <label for="common_name">Common name *</label>
+    </dt>
+    <dd>
+      <input name="common_name" placeholder="Common Name" type="text" value="<%= params[:common_name] || @bird[:common_name] %>">
+    </dd>
+    <dt>
+      <label for="scientific_name">Scientific name *</label>
+    </dt>
+    <dd>
+      <input name="scientific_name" placeholder="Scientific Name" type="text" value="<%= params[:scientific_name] || @bird[:scientific_name] %>">
+    </dd>
+  </dl>
+  <fieldset>
+    <input type="submit" value="Save">
+    <a href="/birds/<%= params[:bird_id] %>">Cancel</a>
+  </fieldset>
+</form>
+
+<% content_for :header_links do %>
+  <ul>
+    <li>
+      <form method="post" action="/users/signout">
+        <button type="submit">Sign Out</button>
+      </form>
+    </li>
+  </ul>
+<% end %>
+

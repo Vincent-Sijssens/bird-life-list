@@ -1,0 +1,48 @@
+  <header>
+    <h2><%= @bird[:common_name] %></h2>
+    <h3>(<%= @bird[:scientific_name] %>)</h3>
+    <ul>
+      <li><a href="/birds/<%= @bird_id %>/edit">Edit species</a></li>
+    </ul>
+  </header>
+
+  <h4>Observations:</h4>
+  <ul>
+    <% @observations.each do |observation| %>
+      <li>
+        <a href="/birds/<%= @bird_id %>/observations/<%= observation[:id] %>">
+          <h3><%= observation[:date] + ", " + observation[:location] + ", " + observation[:quantity] %></h3>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+
+  <div>
+    <% create_pages(@page, @size, @max_elements) do |page_num| %>
+      <% if page_num == @page %>
+        <span><%= page_num %></span>
+      <% elsif page_num == 1 %>
+        <a href="/birds/<%= @bird_id %>"><%= page_num %></a>
+      <% else %>
+        <a href="/birds/<%= @bird_id %>?page=<%= page_num %>"><%= page_num %></a>
+      <% end %>
+    <% end %>
+  </div>
+
+<a href="/birds/<%= @bird_id %>/new_observation">Add new observation</a>
+
+<% content_for :header_links do %>
+  <ul>
+    <li>
+      <form method="post" action="/users/signout">
+        <button type="submit">Sign Out</button>
+      </form>
+    </li>
+    <li>
+      <a href="/birds">All species</a>
+    </li>
+  </ul>
+<% end %>
+
+
+

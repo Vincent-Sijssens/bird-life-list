@@ -1,0 +1,28 @@
+body {
+  font: normal 20px "PT Sans", Helvetica, Arial, sans-serif;
+  color: #3f3f3f;
+  background: #ffffff; 
+}
+
+body > header {
+  max-width: 1000px;
+  padding: 85px 0 35px 0;
+  margin: 0 auto; 
+}
+
+body > header h1 {
+  display: inline-block;
+  width: 38%;
+  font-size: 30px;
+  color: #2cab5f; 
+}
+
+main {
+  max-width: 1000px;
+  padding: 0 0 40px 0;
+  margin: 0 auto; 
+}
+
+main > form {
+  margin-top: 1.5em; 
+}

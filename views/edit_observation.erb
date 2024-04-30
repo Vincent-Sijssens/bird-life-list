@@ -1,0 +1,86 @@
+<section>
+  <header>
+    <h2>Editing '<%= @bird[:common_name] + ": " + @observation[:date] + ", " + @observation[:location] + ", " + @observation[:quantity] %>'</h2>
+    <ul>
+      <li>
+        <form action="/birds/<%= params[:bird_id] %>/observations/<%= params[:observation_id] %>/delete" method="post">
+          <button type="submit" >Delete observation</button>
+        </form>
+      </li>
+    </ul>
+  </header>
+</section>
+
+<form action="/birds/<%= params[:bird_id] %>/observations/<%= params[:observation_id] %>" method="post">
+  <p>Edit the observation</p>
+  <dl>
+    <dt>
+      <label for="date">Date *</label>
+    </dt>
+    <dd>
+      <input name="date" placeholder="Date" type="date" value="<%= params[:date] || @observation[:date] %>" max = '2200-01-01' min = '1900-01-01'>
+    </dd>
+    <dt>
+      <label for="location">Location *</label>
+    </dt>
+    <dd>
+      <input name="location" placeholder="ex. Central Park, New York City" type="text" value="<%= params[:location] || @observation[:location] %>">
+    </dd>
+    <dt>
+      <label for="quantity">Quantity *</label>
+    </dt>
+    <dd>
+      <input name="quantity" placeholder="ex. 5" type="text" value="<%= params[:quantity] || @observation[:quantity] %>">
+    </dd>
+    <dt>
+      <label for="time">Time</label>
+    </dt>
+    <dd>
+      <input name="time" placeholder="ex. late afternoon" type="text" value="<%= params[:time] || @observation[:time] %>">
+    </dd>
+    <dt>
+      <label for="habitat">Habitat</label>
+    </dt>
+    <dd>
+      <input name="habitat" placeholder="ex. urban park" type="text" value="<%= params[:habitat] || @observation[:habitat]  %>">
+    </dd>
+    <dt>
+      <label for="weather">Weather</label>
+    </dt>
+    <dd>
+      <input name="weather" placeholder="ex. cloudy" type="text" value="<%= params[:weather] || @observation[:weather] %>">
+    </dd>
+    <dt>
+      <label for="behavior">Behavior</label>
+    </dt>
+    <dd>
+      <input name="behavior" placeholder="ex. resting" type="text" value="<%= params[:behavior] || @observation[:behavior] %>">
+    </dd>
+    <dt>
+      <label for="song_pattern">Song pattern</label>
+    </dt>
+    <dd>
+      <input name="song_pattern" placeholder="ex. pew pew pew pew" type="text" value="<%= params[:song_pattern] || @observation[:song_pattern] %>">
+    </dd>
+    <dt>
+      <label for="additional_notes">Additional notes</label>
+    </dt>
+    <dd>
+      <input name="additional_notes" placeholder="ex. Observed near a pond" type="text" value="<%= params[:additional_notes] || @observation[:additional_notes] %>">
+    </dd>
+  </dl>
+  <fields>
+    <input type="submit" value="Save">
+    <a href="/birds/<%= params[:bird_id] %>/observations/<%= params[:observation_id] %>">Cancel</a>
+  </fieldset>
+</form> 
+
+<% content_for :header_links do %>
+  <ul>
+    <li>
+      <form method="post" action="/users/signout">
+        <button type="submit">Sign Out</button>
+      </form>
+    </li>
+  </ul>
+<% end %>

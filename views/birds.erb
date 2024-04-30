@@ -1,0 +1,139 @@
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5; /* Light gray */
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    background-color: #fff; /* White */
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  a {
+    text-decoration: none;
+    color: #4CAF50; /* Green */
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  h2 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: #4CAF50; /* Green */
+  }
+
+  h3 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: #333; /* Dark gray */
+  }
+
+  span {
+    color: #777; /* Light gray */
+  }
+
+  div.pagination {
+    margin-top: 20px;
+  }
+
+  div.pagination a {
+    display: inline-block;
+    padding: 5px 10px;
+    margin-right: 5px;
+    background-color: #4CAF50; /* Green */
+    color: #fff; /* White */
+    border-radius: 3px;
+    text-decoration: none;
+  }
+
+  div.pagination a:hover {
+    background-color: #45a049; /* Darker green */
+  }
+
+  div.pagination span {
+    display: inline-block;
+    padding: 5px 10px;
+    margin-right: 5px;
+    background-color: #ddd; /* Light gray */
+    color: #333; /* Dark gray */
+    border-radius: 3px;
+  }
+
+  div#header-links ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  div#header-links ul li {
+    display: inline;
+    margin-right: 10px;
+  }
+
+  div#header-links form button {
+    background-color: #4CAF50; /* Green */
+    color: #fff; /* White */
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  div#header-links form button:hover {
+    background-color: #45a049; /* Darker green */
+  }
+</style>
+
+<ul>
+  <% if @size == 0 %>
+  <p>You haven't added any bird species yet.</p>
+  <% else %>
+    <% sort_birds(@page, @birds, @max_elements) do |bird| %>
+      <li>
+        <a href="/birds/<%= bird[:id] %>">
+          <h2><%= bird[:common_name] %></h2>
+        </a>
+        <h3>(<%= bird[:scientific_name] %>)</h3>
+        <span>Observations: <%= bird[:total_observations] %></span>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
+
+<div class="pagination">
+  <% create_pages(@page, @size, @max_elements) do |page_num| %>
+    <% if page_num == @page %>
+      <span><%= page_num %></span>
+    <% elsif page_num == 1 %>
+      <a href="/birds"><%= page_num %></a>
+    <% else %>
+      <a href="/birds?page=<%= page_num %>"><%= page_num %></a>
+    <% end %>
+  <% end %>
+</div>
+
+<div id="header-links">
+<% content_for :header_links do %>
+  <ul>
+    <li>
+      <form method="post" action="/users/signout">
+        <button type="submit">Sign Out</button>
+      </form>
+    </li>
+    <li>
+      <a href="/birds/new">Add new species</a>
+    </li>
+  </ul>
+<% end %>
+</div>

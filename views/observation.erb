@@ -1,0 +1,34 @@
+  <header>
+      <h2><%= @bird[:common_name] %></h2>
+      <h3>(<%= @bird[:scientific_name] %>)</h3>
+      <ul>
+        <li><a href="/birds/<%= @bird_id %>/observations/<%= @observation_id %>/edit">Edit observation</a></li>
+      </ul>
+  </header>
+  <main>
+    <ul>
+      <h2>Date: <%= @observation[:date] %></h2>
+      <h2>Location: <%= @observation[:location] %></h2>
+      <h2>Quantity: <%= @observation[:quantity] %></h2>
+      <h2>Time: <%= @observation[:time] %></h2>
+      <h2>Habitat: <%= @observation[:habitat] %></h2>
+      <h2>Weather: <%= @observation[:weather] %></h2>
+      <h2>Behavior: <%= @observation[:behavior] %></h2>
+      <h2>Song pattern: <%= @observation[:song_pattern] %></h2>
+      <h2>Additional notes: <%= @observation[:additional_notes] %></h2>
+    </ul>
+  </main>
+
+<% content_for :header_links do %>
+  <ul>
+    <li>
+      <form method="post" action="/users/signout">
+        <button type="submit">Sign Out</button>
+      </form>
+    </li>
+    <li>
+      <a href="/birds/<%= @bird_id %>">All observations</a>
+    </li>
+  </ul>
+<% end %>
+
